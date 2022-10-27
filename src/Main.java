@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -18,22 +19,55 @@ public class Main {
         int choice = scanner.nextInt();
         switch(choice) {
             case 1:
-                System.out.println("Podaj tytuł: ");
+                System.out.println("Give the title: ");
                 String title = scanner.next();
-                System.out.println("Podaj autora: ");
+                System.out.println("Give the author: ");
                 String author = scanner.next();
-                System.out.println("Podaj datę wydania: ");
+                System.out.println("Give the release date: ");
                 String date = scanner.next();
-                System.out.println("Podaj liczbę stron: ");
+                System.out.println("Give the number of pages: ");
                 int numberOfPages = scanner.nextInt();
-                System.out.println("Podaj cenę: ");
+                System.out.println("Give the price: ");
                 int price = scanner.nextInt();
                 rental.addToDatabase(new Book(title, author, date, numberOfPages, price));
                 break;
             case 2:
+                System.out.println("Give the ID of the book to be edited: ");
+                int idOfBookToEdit = scanner.nextInt();
+                System.out.println("""
+                Give the element to be edited: ""
+                [1] Title
+                [2] Author
+                [3] ReleaseDate
+                [4] NumberOfPages
+                [5] Price
+                [6] Status""");
+                int parameterOfBookToEdit = scanner.nextInt();
+                System.out.println("Replace this data with: ");
+                String modifiedData = scanner.next();
+                switch(parameterOfBookToEdit){
+                    case 1:
+                        rental.getBooksDatabase().get(idOfBookToEdit).setTitle(modifiedData);
+                        break;
+                    case 2:
+                        rental.getBooksDatabase().get(idOfBookToEdit).setAuthor(modifiedData);
+                        break;
+                    case 3:
+                        rental.getBooksDatabase().get(idOfBookToEdit).setReleaseDate(modifiedData);
+                        break;
+                    case 4:
+                        rental.getBooksDatabase().get(idOfBookToEdit).setNumberOfPages(Integer.parseInt(modifiedData));
+                        break;
+                    case 5:
+                        rental.getBooksDatabase().get(idOfBookToEdit).setPrice(Integer.parseInt(modifiedData));
+                        break;
+                    case 6:
+                        rental.getBooksDatabase().get(idOfBookToEdit).setStatus(Boolean.getBoolean(modifiedData));
+                        break;
+                }
                 break;
             case 3:
-                System.out.println("Podaj ID książki do usunięcia");
+                System.out.println("Give the ID of the book to be deleted");
                 int id = scanner.nextInt();
                 rental.removeFromDatabase(id);
                 break;
