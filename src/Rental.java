@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Rental  {
-    private ArrayList<Book> booksDatabase = new ArrayList<>( );
+    final private ArrayList<Book> booksDatabase = new ArrayList<>( );
 
     public void printDatabase(){
         for(Book book : booksDatabase){
@@ -21,7 +21,4 @@ public class Rental  {
         return booksDatabase;
     }
 
-    public void setBooksDatabase(ArrayList<Book> booksDatabase) {
-        this.booksDatabase = booksDatabase;
-    }
 }
